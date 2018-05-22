@@ -3,23 +3,24 @@ import { Apollo } from "apollo-angular";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import gql from "graphql-tag";
+
 import { Subscription } from "apollo-client/util/Observable";
 import { SpinnerVisibilityService } from "ng-http-loader/services/spinner-visibility.service";
 import { NgForm } from "@angular/forms";
 
-const getAuthorsQuery = gql`
-  {
-    authors {
-      name
-      id
-    }
-  }
-`;
+declare var $;
+// GraphQL Query
+import {
+  getAuthorsQuery,
+  addBookMutation,
+  getBooksQuery
+} from "../../graphQLQueries/Query";
+import { error } from "@angular/compiler/src/util";
 
 export class Book {
   name: String;
   genre: String;
-  authorId: String;
+  authorId: number;
 }
 
 @Component({
@@ -59,5 +60,20 @@ export class AddBookComponent implements OnInit, OnDestroy {
 
   createBook(form: NgForm) {
     console.log(form.value);
+    this.apollo
+      .mutate<any>({
+        mutation: addBookMutation,
+        variables: {
+          name: this.book.name,
+          genre: this.book.genre,
+          authorId: this.book.authorId
+        },
+        refetchQueries: [{ query: getBooksQuery }]
+      })
+      .subscribe(response => {
+        console.log("Added", response.data);
+        form.reset();
+        $("#addBook").modal("hide");
+      });
   }
 }

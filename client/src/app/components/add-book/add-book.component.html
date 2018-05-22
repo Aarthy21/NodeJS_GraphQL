@@ -17,7 +17,7 @@
           <div class="form-group">
             <label for="bookAuthor">Author</label>
             <select class="form-control" id="bookAuthor" [(ngModel)]="book.authorId" name="authorId">
-              <option *ngFor="let author of authors" value="author.id">{{author.name}}</option>
+              <option *ngFor="let author of authors" [value]="author.id">{{author.name}}</option>
             </select>
           </div>
           <div class="form-group">

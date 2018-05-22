@@ -5,17 +5,9 @@ import { map } from "rxjs/operators";
 import gql from "graphql-tag";
 import { Subscription } from "apollo-client/util/Observable";
 import { SpinnerVisibilityService } from "ng-http-loader/services/spinner-visibility.service";
-const getBooksQuery = gql`
-  {
-    books {
-      name
-      genre
-      author {
-        name
-      }
-    }
-  }
-`;
+
+// GraphQL Query
+import { getBooksQuery } from "../../graphQLQueries/Query";
 
 @Component({
   selector: "app-book-list",
