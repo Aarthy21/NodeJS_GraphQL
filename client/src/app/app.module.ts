@@ -13,6 +13,7 @@ import { ApolloModule, Apollo } from "apollo-angular";
 import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { NgHttpLoaderModule } from "ng-http-loader/ng-http-loader.module";
+import { AddAuthorComponent } from "./components/add-author/add-author.component";
 // export function createApollo(httpLink: HttpLink) {
 //   return {
 //     link: httpLink.create({ uri: "https://api.example.com/graphql" }),
@@ -21,7 +22,12 @@ import { NgHttpLoaderModule } from "ng-http-loader/ng-http-loader.module";
 // }
 
 @NgModule({
-  declarations: [AppComponent, BookListComponent, AddBookComponent],
+  declarations: [
+    AppComponent,
+    BookListComponent,
+    AddBookComponent,
+    AddAuthorComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
