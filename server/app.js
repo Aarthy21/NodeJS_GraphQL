@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
 const mongoose = require("mongoose");
@@ -15,6 +16,8 @@ mongoose.connect("mongodb://ikismail:test123@ds231070.mlab.com:31070/graphql");
 mongoose.connection.once("open", () => {
   console.log("connected to database");
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
   "/graphql",
