@@ -16,6 +16,7 @@ import {
 import { Author } from "../add-author/add-author.component";
 
 export class Book {
+  id: string;
   name: String;
   genre: String;
   authorId: number;

@@ -1,0 +1,25 @@
+<div class="container" style="background: #fff; ">
+  <h4 class="text-center" style="padding: 5px">Book Details</h4>
+
+  <div>
+    <dl>
+      <dt> Book Title </dt>
+      <dd class="text-muted">{{book.name}}.</dd>
+      <dt>Genre</dt>
+      <dd class="text-muted">{{book.genre}}.</dd>
+      <dt>Written By.</dt>
+      <dd class="text-muted">{{book.author?.name}}.</dd>
+    </dl>
+  </div>
+
+  <div *ngIf="book.author?.books">
+    <dl>
+      <dt>Other Books Written by author:</dt>
+      <dd class="text-muted">{{book.author?.name}}.</dd>
+    </dl>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let book of book.author?.books">Book Title: {{book.name}}
+        <br> Book Genre: {{book.genre}}</li>
+    </ul>
+  </div>
+</div>

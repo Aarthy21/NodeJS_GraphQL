@@ -14,6 +14,7 @@ import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { NgHttpLoaderModule } from "ng-http-loader/ng-http-loader.module";
 import { AddAuthorComponent } from "./components/add-author/add-author.component";
+import { BookDetailsComponent } from "./components/book-details/book-details.component";
 // export function createApollo(httpLink: HttpLink) {
 //   return {
 //     link: httpLink.create({ uri: "https://api.example.com/graphql" }),
@@ -26,7 +27,8 @@ import { AddAuthorComponent } from "./components/add-author/add-author.component
     AppComponent,
     BookListComponent,
     AddBookComponent,
-    AddAuthorComponent
+    AddAuthorComponent,
+    BookDetailsComponent
   ],
   imports: [
     BrowserModule,

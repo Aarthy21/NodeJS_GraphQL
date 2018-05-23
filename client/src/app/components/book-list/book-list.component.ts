@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { SpinnerVisibilityService } from "ng-http-loader/services/spinner-visibility.service";
 
 // GraphQL Query
-import { getBooksQuery } from "../../graphQLQueries/Query";
+import { getBooksQuery, getBookQuery } from "../../graphQLQueries/Query";
 import { Book } from "../add-book/add-book.component";
 
 @Component({
@@ -14,6 +14,8 @@ import { Book } from "../add-book/add-book.component";
 })
 export class BookListComponent implements OnInit {
   books: Observable<Book[]>;
+
+  selectedBook: any;
 
   constructor(
     private apollo: Apollo,
@@ -27,9 +29,29 @@ export class BookListComponent implements OnInit {
         query: getBooksQuery
       })
       .valueChanges.subscribe(({ data, loading }) => {
-        this.spinner.hide();
         this.books = data.books;
         console.log("data", this.books);
+
+        // Initially setting first element to book details
+        // const firstBook: any = this.books[0];
+        // this.selectedBook = firstBook;
+      });
+    this.spinner.hide();
+  }
+
+  selectBook(book: any) {
+    console.log("selected Book", book);
+
+    this.apollo
+      .query<any>({
+        query: getBookQuery,
+        variables: {
+          id: book.id
+        }
+      })
+      .subscribe(response => {
+        console.log("reposne Book", response.data);
+        this.selectedBook = response.data.book;
       });
   }
 }
